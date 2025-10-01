@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: r7kamura/dependabot-bundler-conservative@v0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN_WITH_REQUIRED_PERMISSIONS }}
+          github_token: ${{ secrets.ACCESS_TOKEN_WITH_REQUIRED_PERMISSIONS }}
 ```
 
 Also, please configure the secrets so that GitHub Actions workflows triggered by Dependabot are provided with an access token that has the appropriate permissions.
