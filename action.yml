@@ -9,6 +9,7 @@ runs:
   steps:
     - uses: actions/checkout@v4
       with:
+        fetch-depth: 10
         token: ${{ inputs.github_token }}
     - uses: dependabot/fetch-metadata@v2
       id: metadata
