@@ -18,7 +18,7 @@ runs:
     - uses: ruby/setup-ruby@v1
     - run: |
         git checkout HEAD~ -- Gemfile.lock
-        bundle lock --update --conservative "${{ steps.metadata.outputs.dependency-names }}"
+        bundle lock --conservative --update "${{ steps.metadata.outputs.dependency-names }}"
       env:
         BUNDLE_FROZEN: "false"
       shell: bash
