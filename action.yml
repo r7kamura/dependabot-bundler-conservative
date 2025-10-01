@@ -17,6 +17,7 @@ runs:
         github-token: ${{ inputs.github_token }}
     - uses: ruby/setup-ruby@v1
     - run: |
+        git reset --hard HEAD~
         git checkout HEAD~ -- Gemfile.lock
         bundle lock --conservative --update "${{ steps.metadata.outputs.dependency-names }}"
       env:
