@@ -16,14 +16,17 @@ runs:
       id: metadata
       with:
         github-token: ${{ inputs.github_token }}
-    - uses: ruby/setup-ruby@v1
-    - run: |
+    - if: ${{ steps.metadata.outputs.dependency-ecosystem == 'bundler' }}
+      uses: ruby/setup-ruby@v1
+    - if: ${{ steps.metadata.outputs.dependency-ecosystem == 'bundler' }}
+      run: |
         git checkout HEAD~ -- Gemfile.lock
         bundle lock --conservative --update "${{ steps.metadata.outputs.dependency-names }}"
       env:
         BUNDLE_FROZEN: "false"
       shell: bash
-    - uses: stefanzweifel/git-auto-commit-action@v6
+    - if: ${{ steps.metadata.outputs.dependency-ecosystem == 'bundler' }}
+      uses: stefanzweifel/git-auto-commit-action@v6
 branding:
   color: blue
   icon: git-pull-request
