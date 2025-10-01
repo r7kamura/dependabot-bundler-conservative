@@ -1,0 +1,25 @@
+name: dependabot-bundler-conservative
+description: Update Dependabot's pull request for bundler with `--conservative` option.
+inputs:
+  github-token:
+    description: GitHub access token (See README for required permissions).
+    required: true
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v4
+      with:
+        token: ${{ inputs.github_token }}
+    - uses: dependabot/fetch-metadata@v2
+      id: metadata
+      with:
+        github-token: ${{ inputs.github_token }}
+    - uses: ruby/setup-ruby@1
+    - run: bundle lock --update --conservative "${{ steps.metadata.outputs.dependency-names }}"
+      env:
+        BUNDLE_FROZEN: "false"
+      shell: bash
+    - uses: stefanzweifel/git-auto-commit-action@v6
+branding:
+  color: blue
+  icon: git-pull-request
