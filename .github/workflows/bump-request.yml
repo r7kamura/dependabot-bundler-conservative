@@ -1,0 +1,22 @@
+name: bump-request
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_type:
+        type: choice
+        description: How to bump the version.
+        options:
+          - major
+          - minor
+          - patch
+        default: patch
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./
+        with:
+          release_type: ${{ inputs.release_type }}
