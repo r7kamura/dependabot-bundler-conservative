@@ -21,8 +21,6 @@ on:
 
 jobs:
   dependabot-bundler-conservative:
-    permissions:
-      pull-requests: read
     runs-on: ubuntu-latest
     if: github.actor == 'dependabot[bot]'
     steps:
