@@ -14,7 +14,7 @@ runs:
       id: metadata
       with:
         github-token: ${{ inputs.github_token }}
-    - uses: ruby/setup-ruby@1
+    - uses: ruby/setup-ruby@v1
     - run: |
         git checkout HEAD~ -- Gemfile.lock
         bundle lock --update --conservative "${{ steps.metadata.outputs.dependency-names }}"
