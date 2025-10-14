@@ -10,12 +10,12 @@ runs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 2
-        token: ${{ inputs.github_token }}
+        token: ${{ inputs.github-token }}
         ref: ${{ github.event.pull_request.head.sha }}
     - uses: dependabot/fetch-metadata@v2
       id: metadata
       with:
-        github-token: ${{ inputs.github_token }}
+        github-token: ${{ inputs.github-token }}
     - if: ${{ steps.metadata.outputs.package-ecosystem == 'bundler' }}
       uses: ruby/setup-ruby@v1
     - if: ${{ steps.metadata.outputs.package-ecosystem == 'bundler' }}
