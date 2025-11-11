@@ -27,6 +27,11 @@ runs:
       shell: bash
     - if: ${{ steps.metadata.outputs.package-ecosystem == 'bundler' }}
       uses: stefanzweifel/git-auto-commit-action@v6
+      with:
+        commit_message: |
+          Update Gemfile.lock with `--conservative` option
+
+          [dependabot skip]
 branding:
   color: blue
   icon: git-pull-request
