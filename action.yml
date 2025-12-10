@@ -16,12 +16,20 @@ runs:
       id: metadata
       with:
         github-token: ${{ inputs.github-token }}
+    - name: Convert to dependency names no comma
+      if: ${{ steps.metadata.outputs.package-ecosystem == 'bundler' }}
+      id: convert-dependency-names
+      run: |
+        original_dependency_names="${{ steps.metadata.outputs.dependency-names }}"
+        converted_dependency_names="${original_dependency_names//,/ }"
+        echo "value=${converted_dependency_names}" >> "$GITHUB_OUTPUT"
+      shell: bash
     - if: ${{ steps.metadata.outputs.package-ecosystem == 'bundler' }}
       uses: ruby/setup-ruby@v1
     - if: ${{ steps.metadata.outputs.package-ecosystem == 'bundler' }}
       run: |
         git checkout HEAD~ -- Gemfile.lock
-        bundle lock --conservative --update "${{ steps.metadata.outputs.dependency-names }}"
+        bundle lock --conservative --update ${{ steps.convert-dependency-names.outputs.value }}
       env:
         BUNDLE_FROZEN: "false"
       shell: bash
