@@ -37,6 +37,6 @@ Also, please configure the secrets so that GitHub Actions workflows triggered by
 
 The access token used by this custom action requires the following permissions:
 
+- `actions:write`
 - `contents:write`
 - `pull-requests:read`
-- `workflow:write`
